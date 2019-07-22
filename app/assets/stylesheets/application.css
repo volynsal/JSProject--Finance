@@ -1,0 +1,122 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ /* body {
+     width: 100vw;
+     height: 100vh;
+ }
+  */
+ #ticker {
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #f4f4f5;
+    background-color: #f4f4f5;
+    height: 4.6875vh;
+    width: 7.8125vw;
+    padding: 1.25vh 0.625vw 1.25vh 0.625vw;
+    margin-right: 1.25vw;
+    margin-top: 0.75vh;
+    color: #666666;
+    font-size: 0.859375vmax;
+ }
+
+ #ticker:focus {
+     background-color: white;
+ }
+
+ #ticker:hover {
+     cursor: pointer;
+ }
+
+ img {
+     z-index: 10;
+}
+
+ p {
+     font-family: 'Source Sans Pro', 'sans serif';
+     font-size: 1.015625vw;
+ }
+
+ .plot-container plotly {
+     z-index: -1;
+ }
+
+ canvas {
+     width: 96.875vw !important;
+     height: 89.0625vh !important;
+     margin-left: 1.1vw;
+     margin-top: -3vh;
+     /* margin-bottom: 20px; */
+     /* align-content: center; */
+     
+ }
+
+p {
+    font-family: 'Source Sans Pro', 'sans serif';
+    /* color: #666666; */
+}
+
+ol {
+    font-family: 'Source Sans Pro', 'sans serif';
+}
+
+li {
+    font-family: 'Source Sans Pro', 'sans serif';
+    font-size: 1.015625vmax;
+}
+
+/* span {
+    font-size: 25px;
+    font-family: 'Source Sans Pro', 'sans serif';
+    color: #666666;
+    font-weight: 600;
+} */
+
+#credit {
+    font-family: 'Source Sans Pro', 'sans serif';
+    font-size: 1.015625vw;
+    color: black;
+    /* margin-top: 10vh; */
+    margin-bottom: 0px;
+}
+
+/* body { 
+    overflow: hidden;
+}  */
+
+
+.credit-container {
+    display: inline-flex;  
+    justify-content: 'space-between';
+    top: 94vh;
+    margin-left: -0.3vw;
+    position: sticky;
+}
+
+.credit-container img {
+    /* margin-top: 10vh; */
+    padding-left: 0.5vw;
+    margin-top: 1.25vh;
+}
+
+body {
+    overflow: hidden;
+}
+
+#link-finbox img {
+    height: 3.90625vh;
+    width: 1.953125vw;
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Valuations Project</title>
+    <link rel="stylesheet" type="text/css" href="app/assets/stylesheets/application.css" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap" rel="stylesheet">
+</head>
+
+<body id="body">
+    <script type="application/javascript" src="./dist/main.js"></script>
+    <div id="tester"></div>
+    <div class="credit-container">
+        <p id="credit">Credit to: </p>
+        <a id="link-finbox" href="https://finbox.com/"><img src="app/assets/images/finbox.io.jpg" alt=""></a>
+    </div>
+    <br />
+    <canvas id="myChart" > </canvas>
+</body>
+
+<script>
+    function resizeWindow() {
+        if (window.screen.availHeight === 1057) {
+            document.body.style.zoom = "1.5";
+        }
+
+        else if (window.screen.availHeight === 752) {
+            document.body.style.zoom = "1.0";
+        }
+    }
+</script>
+
+</html>
