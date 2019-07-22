@@ -412,6 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.width = "11.71875vw";
         img.style.marginTop = '0.3vh';
 
+        personalNav.style.marginTop = "0.5vh";
         personalNav.style.marginTop = "1.6vh";
         personalNav.style.marginLeft = "0.25vw";
         githubLogo.style.paddingLeft = "0.6vw";
@@ -689,8 +690,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             })
 
-
+        debugger
         ticker.onchange = function () {
+            debugger
             TESTER.style.paddingBottom = "0";
             body.insertBefore(loadingBars, myChart);
 
@@ -700,6 +702,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (body.contains(warningMessage)) {
                 debugger
                 body.removeChild(warningMessage);
+            }
+            if (ticker.value === "") {
+                ticker.value = "ZZZZZZZZ";
             }
 
             fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/company_name`, {
