@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ticker.setAttribute('value', 'FB');
         
         var warningMessage = document.createElement('span');
-        warningMessage.innerHTML = "Please enter a valid ticker";
+        warningMessage.innerHTML = "Please enter a valid ticker!";
         warningMessage.style.fontFamily = "Source Sans Pro", "sans serif";
         warningMessage.style.fontSize = "5vmax";
         warningMessage.style.display = "flex";
