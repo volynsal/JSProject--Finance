@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     titleIntroduction.innerHTML = "Fair Value GPS";
     titleBackground.innerHTML = "Background: "
     titleInstructions.innerHTML = "Instructions: "
-    background.innerHTML = "Stocks can be valued using a variety of techniques. The following data visualization will enable the user to compare the fair value calculated by multiple valuation techniques at once. The most popular include: 5Y DCF Growth Exit, EBITDA Multiples, and P/E Multiples (which are used to create buy or sell signals). Please use the following information at your own discretion."
+    background.innerHTML = "Stocks can be valued using a variety of techniques. The following data visualization will enable the user to compare the fair value calculated by multiple valuation techniques at once. The most popular include: 5Y DCF Growth Exit, EBITDA Multiples, and P/E Multiples (which are used to trigger buy or sell signals). Please use the following information at your own discretion."
     
     firstInstruction.innerHTML = "Type a ticker in the top-right hand corner of your screen.";
     secondInstruction.innerHTML = "Wait for the bar chart to load the calculated fair values.";
