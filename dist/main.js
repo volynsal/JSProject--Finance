@@ -423,6 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
         datapageHeader.appendChild(personalNav);
 
         datapageHeader.style.display = "inline-flex";
+        datapageHeader.style.paddingTop = "0.5vh";
                 
         TESTER.appendChild(datapageHeader);
         TESTER.appendChild(ticker);
@@ -724,7 +725,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (jsoncompanyName.status === 404 || ticker.value === "") {
                             debugger
                             body.removeChild(loadingBars);
-                            TESTER.style.paddingBottom = "22.5vh";
+                            TESTER.style.paddingBottom = "28vh";
                             warningMessage.style.textAlign = 'center';
                             body.insertBefore(warningMessage, myChart);
                         }
