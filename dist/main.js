@@ -423,7 +423,6 @@ document.addEventListener("DOMContentLoaded", () => {
         datapageHeader.appendChild(personalNav);
 
         datapageHeader.style.display = "inline-flex";
-        datapageHeader.style.paddingTop = "0.5vh";
                 
         TESTER.appendChild(datapageHeader);
         TESTER.appendChild(ticker);
