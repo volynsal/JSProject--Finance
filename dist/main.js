@@ -760,7 +760,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             debugger
                                             warningMessage.innerHTML = "Premium key required for this ticker!";
                                             warningMessage.style.marginLeft = "20vw";
-                                            warningMessage.style.width = "60vw";
+                                            warningMessage.style.width = "55vw";
 
                                             body.removeChild(loadingBars);
                                             TESTER.style.paddingBottom = "28vh";
