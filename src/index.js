@@ -267,12 +267,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ticker.setAttribute('value', 'FB');
         
         var warningMessage = document.createElement('span');
-        warningMessage.innerHTML = "Please enter a valid ticker!";
         warningMessage.style.fontFamily = "Source Sans Pro", "sans serif";
         warningMessage.style.fontSize = "5vmax";
         warningMessage.style.display = "flex";
         warningMessage.style.fontWeight = "900";
-        warningMessage.style.marginLeft = "20vw";
         
         myChart.style.height = "89.0625vh !important";
         myChart.style.width = "96.875vw! important";
@@ -586,26 +584,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
             })
-                    .then(rescompanyName => rescompanyName.json())
-                    .then(jsoncompanyName => {
+                    .then(rescompanyName => {
+                        let status = rescompanyName.status; 
                         debugger
-                        var companyName = jsoncompanyName.data;
-
-                        debugger
-                        if (jsoncompanyName.status === 404 || ticker.value === "") {
+                        
+                        if (status === 207 || ticker.value === "") {
                             warningMessage.innerHTML = "Please enter a valid ticker!"
+                            warningMessage.style.marginLeft = "20vw";
+                            warningMessage.style.width = "78.88888888888889vw";
+
                             body.removeChild(loadingBars);
                             TESTER.style.paddingBottom = "28vh";
                             warningMessage.style.textAlign = 'center';
                             body.insertBefore(warningMessage, myChart);
                         }
-                        else if (jsoncompanyName.status === 402) {
-                            warningMessage.innerHTML = "Premium key required for this ticker!"
-                            body.removeChild(loadingBars);
-                            TESTER.style.paddingBottom = "28vh";
-                            warningMessage.style.textAlign = 'center';
-                            body.insertBefore(warningMessage, myChart);
-                        };
+                        else {
+                            return rescompanyName.json();
+                        }
+                    })
+                    .then(jsoncompanyName => {
+                        var companyName = jsoncompanyName.data;
 
                         fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
                             headers: {
@@ -616,8 +614,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
                         })
                             .then(resQuote => resQuote.json())
-                            .then(jsonQuote => {
-
+                            .then(jsonQuote => {                                
                                 var information = {};
                                 information['Market Price'] = jsonQuote.data;
 
@@ -629,7 +626,22 @@ document.addEventListener("DOMContentLoaded", () => {
                                     },
                                     // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
                                 })
-                                    .then(resValuations => resValuations.json())
+                                    .then(resValuations => {
+                                        if (resValuations.status === 402) {
+                                            debugger
+                                            warningMessage.innerHTML = "Premium key required for this ticker!";
+                                            warningMessage.style.marginLeft = "20vw";
+                                            warningMessage.style.width = "60vw";
+
+                                            body.removeChild(loadingBars);
+                                            TESTER.style.paddingBottom = "28vh";
+                                            warningMessage.style.textAlign = 'center';
+                                            body.insertBefore(warningMessage, myChart);
+                                        }
+                                        else {
+                                            return resValuations.json();
+                                        }
+                                    })
                                     .then(jsonValuations => {
 
                                         valuations = jsonValuations.data.models;
