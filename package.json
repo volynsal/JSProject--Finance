@@ -17,6 +17,7 @@
   "dependencies": {
     "babel-loader": "^8.0.6",
     "chart.js": "^2.8.0",
+    "cors-anywhere": "^0.4.1",
     "d3.js": "0.0.2-security",
     "ify-loader": "^1.1.0",
     "lodash": "^4.17.11",

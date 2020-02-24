@@ -593,12 +593,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         debugger
                         if (jsoncompanyName.status === 404 || ticker.value === "") {
-                            debugger
+                            warningMessage.innerHTML = "Please enter a valid ticker!"
                             body.removeChild(loadingBars);
                             TESTER.style.paddingBottom = "28vh";
                             warningMessage.style.textAlign = 'center';
                             body.insertBefore(warningMessage, myChart);
                         }
+                        else if (jsoncompanyName.status === 402) {
+                            warningMessage.innerHTML = "Premium key required for this ticker!"
+                            body.removeChild(loadingBars);
+                            TESTER.style.paddingBottom = "28vh";
+                            warningMessage.style.textAlign = 'center';
+                            body.insertBefore(warningMessage, myChart);
+                        };
 
                         fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
                             headers: {
