@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postIntroduction.style.backgroundColor = '#21ce99';
     postIntroduction.style.fontFamily = 'Source Sans Pro', 'sans serif';
     postIntroduction.style.transition = '300ms';
-    postIntroduction.style.borderColor = '#21ce99';
+    postIntroduction.style.borderColor = 'transparent';
     postIntroduction.style.fontSize = '1.171875vmax';
     postIntroduction.style.fontWeight = '600';
     postIntroduction.style.padding = '0.78125vh 0.78125vw 0.78125vh 0.78125vw';
@@ -162,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
     postIntroduction.style.marginTop = '1.875vh';
     postIntroduction.style.marginBottom = '1.875vh';
     postIntroduction.style.marginLeft = "9.765625vw";
-    postIntroduction.style.borderColor = 'transparent';
 
     postIntroduction.onmouseover = function() {
         postIntroduction.style.backgroundColor = "#1ae9aa";
