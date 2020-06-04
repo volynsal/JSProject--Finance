@@ -165,13 +165,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     postIntroduction.onmouseover = function() {
         postIntroduction.style.backgroundColor = "#1ae9aa";
-        postIntroduction.style.borderColor = "#1ae9aa";
+        postIntroduction.style.borderColor = "transparent";
         postIntroduction.style.cursor = pointer;
     }
 
     postIntroduction.onmouseleave = function() {
         postIntroduction.style.backgroundColor = '#21ce99';
-        postIntroduction.style.borderColor = '#21ce99';
+        postIntroduction.style.borderColor = 'transparent';
         postIntroduction.style.cursor = pointer;
     }
 

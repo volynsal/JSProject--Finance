@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postIntroduction.style.backgroundColor = '#21ce99';
     postIntroduction.style.fontFamily = 'Source Sans Pro', 'sans serif';
     postIntroduction.style.transition = '300ms';
-    postIntroduction.style.borderColor = '#21ce99';
+    postIntroduction.style.borderColor = 'transparent';
     postIntroduction.style.fontSize = '1.171875vmax';
     postIntroduction.style.fontWeight = '600';
     postIntroduction.style.padding = '0.78125vh 0.78125vw 0.78125vh 0.78125vw';
@@ -294,13 +294,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     postIntroduction.onmouseover = function() {
         postIntroduction.style.backgroundColor = "#1ae9aa";
-        postIntroduction.style.borderColor = "#1ae9aa";
+        postIntroduction.style.borderColor = "transparent";
         postIntroduction.style.cursor = pointer;
     }
 
     postIntroduction.onmouseleave = function() {
         postIntroduction.style.backgroundColor = '#21ce99';
-        postIntroduction.style.borderColor = '#21ce99';
+        postIntroduction.style.borderColor = 'transparent';
         postIntroduction.style.cursor = pointer;
     }
 
@@ -341,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     img.src = "app/assets/images/logo.png";
     img.onclick = () => {
-        debugger
         window.location = 'https://robbinhood.herokuapp.com/#/';
     }
 
@@ -361,7 +360,6 @@ document.addEventListener("DOMContentLoaded", () => {
     TESTER.appendChild(postIntroduction);
 
     var ctx = document.getElementById('myChart').getContext('2d');
-    debugger
     myChart.style.height = "0vh";
     myChart.style.width = "0vw";
     myChart.style.marginLeft= "0vw";
@@ -441,7 +439,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(rescompanyName => rescompanyName.json())
             .then(jsoncompanyName => {
-                debugger
                 var companyName = jsoncompanyName.data;
 
                 fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
@@ -454,7 +451,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                     .then(resQuote => resQuote.json())
                     .then(jsonQuote => {
-                        debugger
                         var information = {};
                         information['Market Price'] = jsonQuote.data;
 
@@ -688,9 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             })
 
-        debugger
         ticker.onchange = function () {
-            debugger
             TESTER.style.paddingBottom = "0";
             body.insertBefore(loadingBars, myChart);
 
@@ -698,7 +692,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 chart.destroy();
             }
             if (body.contains(warningMessage)) {
-                debugger
                 body.removeChild(warningMessage);
             }
             if (ticker.value === "") {
@@ -715,7 +708,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
                     .then(rescompanyName => {
                         let status = rescompanyName.status; 
-                        debugger
                         
                         if (status === 207 || ticker.value === "") {
                             warningMessage.innerHTML = "Please enter a valid ticker!"
@@ -757,7 +749,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 })
                                     .then(resValuations => {
                                         if (resValuations.status === 402) {
-                                            debugger
                                             warningMessage.innerHTML = "Premium key required for this ticker!";
                                             warningMessage.style.marginLeft = "20vw";
                                             warningMessage.style.width = "55vw";
