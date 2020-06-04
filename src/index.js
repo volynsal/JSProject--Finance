@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     firstInstruction.innerHTML = "Type a ticker in the top-right hand corner of your screen.";
     secondInstruction.innerHTML = "Wait for the bar chart to load the calculated fair values.";
     thirdInstruction.innerHTML = "Watch for conditional formatting to give a buy or sell signal based on market price."
-    fourthInstruction.innerHTML = "Click on any bar to export the selected model to Google Sheets.";
+    fourthInstruction.innerHTML = "Click on any bar to get insight into input projections and value ranges";
 
     background.style.textAlign = "justify";
     background.style.paddingRight = "1.4vw";
