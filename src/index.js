@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postIntroduction.style.marginTop = '1.875vh';
     postIntroduction.style.marginBottom = '1.875vh';
     postIntroduction.style.marginLeft = "9.765625vw";
+    postIntroduction.style.borderColor = 'transparent';
 
     postIntroduction.onmouseover = function() {
         postIntroduction.style.backgroundColor = "#1ae9aa";
