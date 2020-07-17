@@ -21,7 +21,7 @@
     "d3.js": "0.0.2-security",
     "fetch": "^1.1.0",
     "ify-loader": "^1.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "node-fetch": "^2.6.0",
     "plotly": "^1.0.6",
     "plotly.js": "^1.48.2"
