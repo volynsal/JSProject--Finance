@@ -211,13 +211,13 @@ document.addEventListener("DOMContentLoaded", () => {
     img.style.width = "10.546875vw";
 
     img.src = "app/assets/images/logo.png";
-    img.onclick = () => {
-        window.location = 'https://robbinhood.herokuapp.com/#/';
-    }
+    // img.onclick = () => {
+    //     window.location = 'https://robbinhood.herokuapp.com/#/';
+    // }
 
-    img.onmouseover = () => {
-        img.style.cursor = 'pointer';
-    }
+    // img.onmouseover = () => {
+    //     img.style.cursor = 'pointer';
+    // }
 
     // Add all elements to introductory section
 
