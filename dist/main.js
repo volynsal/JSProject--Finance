@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
         warningMessage.style.fontWeight = "900";
         
         myChart.style.height = "89.0625vh !important";
-        myChart.style.width = "96.875vw! important";
+        myChart.style.width = "50vw! important";
         myChart.style.marginLeft = "1.1vw";
         myChart.style.marginTop = "-3vh";
 
@@ -409,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
         warningMessage.style.marginLeft = "10vw";
         warningMessage.style.width = "78.88888888888889vw";
 
-        warningMessage.style.textAlign = 'center';
+        warningMessage.style.textAlign = 'justify';
         body.insertBefore(warningMessage, myChart);
 
         img.style.height = "7.8125vh";
