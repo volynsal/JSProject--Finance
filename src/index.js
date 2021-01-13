@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     personalNav.appendChild(linkedinLogo);
 
     personalNav.style.display = "flex";
-
+    personalNav.style.marginLeft = "0.5vw";
     
     // Introduction
 
@@ -258,27 +258,46 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.marginLeft = null;
         
         
-        // var ticker = document.createElement('input');
-        // ticker.setAttribute('type', 'text');
-        // ticker.setAttribute('placeholder', 'Enter ticker');
-        // ticker.setAttribute('id', 'ticker');
-        // ticker.setAttribute('value', 'FB');
+        var ticker = document.createElement('input');
+        ticker.setAttribute('type', 'text');
+        ticker.setAttribute('placeholder', 'Enter ticker');
+        ticker.setAttribute('id', 'ticker');
+        ticker.setAttribute('value', 'N/A');
+        ticker.style.marginRight = "11vw";
+        ticker.style.marginTop = "2.5vh";
+
+        ticker.onfocus = function () {
+            ticker.style.borderColor = 'black';
+        }
+        ticker.onblur = function () {
+            ticker.style.borderColor = '#f4f4f5';
+        }
+        
         
         var warningMessage = document.createElement('span');
         warningMessage.style.fontFamily = "Source Sans Pro", "sans serif";
         warningMessage.style.fontSize = "5vmax";
         warningMessage.style.display = "flex";
-        warningMessage.style.fontWeight = "900";
+        warningMessage.style.fontWeight = "700";
         
         myChart.style.height = "89.0625vh !important";
         myChart.style.width = "50vw! important";
         myChart.style.marginLeft = "1.1vw";
         myChart.style.marginTop = "-3vh";
 
-        warningMessage.innerHTML = "Please bear with us as we search for an alternate data provider. Finbox fully deprecated their API in December 2020."
-        warningMessage.style.marginTop = "10vh";
+        warningMessage.innerHTML = "Finbox fully deprecated their API in December 2020. Please bear with me as I search for an alternate data provider. In the meantime, you can go to my personal website to view a preview of the project: https://volynsal.github.io/."
+        warningMessage.style.marginTop = "15vh";
         warningMessage.style.marginLeft = "10vw";
         warningMessage.style.width = "78.88888888888889vw";
+        warningMessage.style.fontSize = "3.5vw";
+
+        warningMessage.onmouseover = function () {
+            warningMessage.style.cursor = "pointer";
+        }
+
+        warningMessage.onfocus = function () {
+            window.open('https://volynsal.github.io', _blank);
+        }
 
         warningMessage.style.textAlign = 'justify';
         body.insertBefore(warningMessage, myChart);
@@ -286,10 +305,10 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.height = "7.8125vh";
         img.style.width = "11.71875vw";
         img.style.marginTop = '0.3vh';
+        img.style.display = "none";
 
-        personalNav.style.marginTop = "0.5vh";
-        personalNav.style.marginTop = "1.6vh";
-        personalNav.style.marginLeft = "0.25vw";
+        personalNav.style.marginTop = "3.5vh";
+        personalNav.style.marginLeft = "10vw";
         githubLogo.style.paddingLeft = "0.6vw";
         githubLogo.style.paddingRight = "0.6vw";
 
