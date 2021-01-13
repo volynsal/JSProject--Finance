@@ -278,14 +278,14 @@ document.addEventListener("DOMContentLoaded", () => {
         warningMessage.style.fontFamily = "Source Sans Pro", "sans serif";
         warningMessage.style.fontSize = "5vmax";
         warningMessage.style.display = "flex";
-        warningMessage.style.fontWeight = "700";
+        warningMessage.style.fontWeight = "600";
         
         myChart.style.height = "89.0625vh !important";
         myChart.style.width = "50vw! important";
         myChart.style.marginLeft = "1.1vw";
         myChart.style.marginTop = "-3vh";
 
-        warningMessage.innerHTML = "Finbox fully deprecated their API in December 2020. Please bear with me as I search for an alternate data provider. In the meantime, you can go to my personal website to view a preview of the project: https://volynsal.github.io/."
+        warningMessage.innerHTML = "Finbox fully deprecated their API in December 2020. Please bear with us as we search for an alternate data provider. In the meantime, you can go to my personal website to view a preview of the project: https://volynsal.github.io/."
         warningMessage.style.marginTop = "15vh";
         warningMessage.style.marginLeft = "10vw";
         warningMessage.style.width = "78.88888888888889vw";
@@ -295,8 +295,8 @@ document.addEventListener("DOMContentLoaded", () => {
             warningMessage.style.cursor = "pointer";
         }
 
-        warningMessage.onfocus = function () {
-            window.open('https://volynsal.github.io', _blank);
+        warningMessage.onclick = function (e) {
+            window.open('https://volynsal.github.io', '_blank');
         }
 
         warningMessage.style.textAlign = 'justify';
