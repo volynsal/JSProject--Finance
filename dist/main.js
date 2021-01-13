@@ -387,11 +387,11 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.marginLeft = null;
         
         
-        var ticker = document.createElement('input');
-        ticker.setAttribute('type', 'text');
-        ticker.setAttribute('placeholder', 'Enter ticker');
-        ticker.setAttribute('id', 'ticker');
-        ticker.setAttribute('value', 'FB');
+        // var ticker = document.createElement('input');
+        // ticker.setAttribute('type', 'text');
+        // ticker.setAttribute('placeholder', 'Enter ticker');
+        // ticker.setAttribute('id', 'ticker');
+        // ticker.setAttribute('value', 'FB');
         
         var warningMessage = document.createElement('span');
         warningMessage.style.fontFamily = "Source Sans Pro", "sans serif";
@@ -403,6 +403,14 @@ document.addEventListener("DOMContentLoaded", () => {
         myChart.style.width = "96.875vw! important";
         myChart.style.marginLeft = "1.1vw";
         myChart.style.marginTop = "-3vh";
+
+        warningMessage.innerHTML = "Please bear with us as we search for an alternate data provider. Finbox fully deprecated their API in December 2020."
+        warningMessage.style.marginTop = "10vh";
+        warningMessage.style.marginLeft = "10vw";
+        warningMessage.style.width = "78.88888888888889vw";
+
+        warningMessage.style.textAlign = 'center';
+        body.insertBefore(warningMessage, myChart);
 
         img.style.height = "7.8125vh";
         img.style.width = "11.71875vw";
@@ -422,572 +430,572 @@ document.addEventListener("DOMContentLoaded", () => {
                 
         TESTER.appendChild(datapageHeader);
         TESTER.appendChild(ticker);
-        body.insertBefore(loadingBars, myChart);
+        // body.insertBefore(loadingBars, myChart);
 
         TESTER.style.display = "flex";
         TESTER.style.justifyContent = "space-between";
 
         var chart;
 
-        fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/company_name`, {
-            headers: {
-                // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-            },
-            // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-        })
-            .then(rescompanyName => rescompanyName.json())
-            .then(jsoncompanyName => {
-                var companyName = jsoncompanyName.data;
+        // fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/company_name`, {
+        //     headers: {
+        //         // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //         // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //         'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //     },
+        //     // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        // })
+        //     .then(rescompanyName => rescompanyName.json())
+        //     .then(jsoncompanyName => {
+        //         var companyName = jsoncompanyName.data;
 
-                fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
-                    headers: {
-                        // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                        // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                        'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-                    },
-                    // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-                })
-                    .then(resQuote => resQuote.json())
-                    .then(jsonQuote => {
-                        var information = {};
-                        information['Market Price'] = jsonQuote.data;
+        //         fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
+        //             headers: {
+        //                 // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //                 // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //                 'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //             },
+        //             // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        //         })
+        //             .then(resQuote => resQuote.json())
+        //             .then(jsonQuote => {
+        //                 var information = {};
+        //                 information['Market Price'] = jsonQuote.data;
 
 
-                        fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/fairvalues/${ticker.value}/models`, {
-                            headers: {
-                                // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                                // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                                'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-                            },
-                            // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-                        })
-                            .then(resValuations => resValuations.json())
-                            .then(jsonValuations => {
+        //                 fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/fairvalues/${ticker.value}/models`, {
+        //                     headers: {
+        //                         // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //                         // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //                         'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //                     },
+        //                     // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        //                 })
+        //                     .then(resValuations => resValuations.json())
+        //                     .then(jsonValuations => {
 
-                                valuations = jsonValuations.data.models;
+        //                         valuations = jsonValuations.data.models;
 
-                                valuations.forEach((element, index) => {
-                                    information[element.name] = parseFloat(element.price.mid.toFixed(2));
-                                })
+        //                         valuations.forEach((element, index) => {
+        //                             information[element.name] = parseFloat(element.price.mid.toFixed(2));
+        //                         })
 
-                                var marketPrice = information['Market Price'];
-                                var finalMetric = 0;
-                                var hoverColor = '';
+        //                         var marketPrice = information['Market Price'];
+        //                         var finalMetric = 0;
+        //                         var hoverColor = '';
 
-                                if (information['5Y DCF Growth Exit'] !== undefined) {
-                                    finalMetric = information['5Y DCF Growth Exit'];
-                                }
-                                else if (information['5Y DCF EBITDA Exit'] !== undefined) {
-                                    finalMetric = information['5Y DCF EBITDA Exit'];
-                                }
-                                else if (information['EBITDA Multiples'] !== undefined) {
-                                    finalMetric = information['EBITDA Multiples'];
-                                }
-                                else if (information['P/E Multiples'] !== undefined) {
-                                    finalMetric = information['P/E Multiples'];
-                                }
+        //                         if (information['5Y DCF Growth Exit'] !== undefined) {
+        //                             finalMetric = information['5Y DCF Growth Exit'];
+        //                         }
+        //                         else if (information['5Y DCF EBITDA Exit'] !== undefined) {
+        //                             finalMetric = information['5Y DCF EBITDA Exit'];
+        //                         }
+        //                         else if (information['EBITDA Multiples'] !== undefined) {
+        //                             finalMetric = information['EBITDA Multiples'];
+        //                         }
+        //                         else if (information['P/E Multiples'] !== undefined) {
+        //                             finalMetric = information['P/E Multiples'];
+        //                         }
 
-                                if (finalMetric >= marketPrice) {
-                                    hoverColor = '#21ce99';
-                                    ticker.onfocus = function () {
-                                        ticker.style.borderColor = '#21ce99';
-                                    }
-                                    ticker.onblur = function () {
-                                        ticker.style.borderColor = '#f4f4f5';
-                                    }
-                                    document.activeElement.style.borderColor = '#21ce99';
-                                }
-                                else {
-                                    hoverColor = '#FF0000';
-                                    ticker.onfocus = function () {
-                                        ticker.style.borderColor = '#FF0000';
-                                    }
-                                    ticker.onblur = function () {
-                                        ticker.style.borderColor = '#f4f4f5';
-                                    }
-                                    ticker.hasfocus = function () {
-                                        ticker.style.borderColor = '#FF0000';
-                                    }
-                                    document.activeElement.style.borderColor = '#FF0000';
-                                }
+        //                         if (finalMetric >= marketPrice) {
+        //                             hoverColor = '#21ce99';
+        //                             ticker.onfocus = function () {
+        //                                 ticker.style.borderColor = '#21ce99';
+        //                             }
+        //                             ticker.onblur = function () {
+        //                                 ticker.style.borderColor = '#f4f4f5';
+        //                             }
+        //                             document.activeElement.style.borderColor = '#21ce99';
+        //                         }
+        //                         else {
+        //                             hoverColor = '#FF0000';
+        //                             ticker.onfocus = function () {
+        //                                 ticker.style.borderColor = '#FF0000';
+        //                             }
+        //                             ticker.onblur = function () {
+        //                                 ticker.style.borderColor = '#f4f4f5';
+        //                             }
+        //                             ticker.hasfocus = function () {
+        //                                 ticker.style.borderColor = '#FF0000';
+        //                             }
+        //                             document.activeElement.style.borderColor = '#FF0000';
+        //                         }
 
-                                var xValues = Object.keys(information);
-                                var yValues = Object.values(information);
-                                var models = [];
+        //                         var xValues = Object.keys(information);
+        //                         var yValues = Object.values(information);
+        //                         var models = [];
 
-                                xValues.forEach((methodology, index) => {
-                                    switch (methodology) {
-                                        case '5Y DCF Revenue Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-5yr`);
-                                            break;
-                                        case '10Y DCF Growth Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-10yr`);
-                                            break;
-                                        case '10Y DCF EBITDA Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-10yr`);
-                                            break;
-                                        case '10Y DCF Revenue Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-10yr`);
-                                            break;
-                                        case 'Earnings Power Value':
-                                            models.push(`https://finbox.com/${ticker.value}/models/epv`);
-                                            break;
-                                        case 'Dividends: Stable Growth':
-                                            models.push(`https://finbox.com/${ticker.value}/models/ddm-sg`);
-                                            break;
-                                        case 'Dividends: Multi-Stage':
-                                            models.push(`https://finbox.com/${ticker.value}/models/ddm-ms`);
-                                            break;
-                                        case 'P/E Multiples':
-                                            models.push(`https://finbox.com/${ticker.value}/models/pe-multiples`);
-                                            break;
-                                        case 'EBITDA Multiples':
-                                            models.push(`https://finbox.com/${ticker.value}/models/ebitda-multiples`);
-                                            break;
-                                        case '5Y DCF Growth Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-5yr`);
-                                            break;
-                                        case '5Y DCF EBITDA Exit':
-                                            models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-5yr`);
-                                            break;
-                                        default:
-                                            models.push(`https://finbox.com/${ticker.value}`);
-                                            break;
-                                    }
-                                })
+        //                         xValues.forEach((methodology, index) => {
+        //                             switch (methodology) {
+        //                                 case '5Y DCF Revenue Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-5yr`);
+        //                                     break;
+        //                                 case '10Y DCF Growth Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-10yr`);
+        //                                     break;
+        //                                 case '10Y DCF EBITDA Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-10yr`);
+        //                                     break;
+        //                                 case '10Y DCF Revenue Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-10yr`);
+        //                                     break;
+        //                                 case 'Earnings Power Value':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/epv`);
+        //                                     break;
+        //                                 case 'Dividends: Stable Growth':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/ddm-sg`);
+        //                                     break;
+        //                                 case 'Dividends: Multi-Stage':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/ddm-ms`);
+        //                                     break;
+        //                                 case 'P/E Multiples':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/pe-multiples`);
+        //                                     break;
+        //                                 case 'EBITDA Multiples':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/ebitda-multiples`);
+        //                                     break;
+        //                                 case '5Y DCF Growth Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-5yr`);
+        //                                     break;
+        //                                 case '5Y DCF EBITDA Exit':
+        //                                     models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-5yr`);
+        //                                     break;
+        //                                 default:
+        //                                     models.push(`https://finbox.com/${ticker.value}`);
+        //                                     break;
+        //                             }
+        //                         })
                                 
-                                // var maxValue = 0;
+        //                         // var maxValue = 0;
 
-                                // yValues.forEach(value => {
-                                //     if (value > maxValue) {
-                                //         maxValue = value;
-                                //     }
-                                // })
+        //                         // yValues.forEach(value => {
+        //                         //     if (value > maxValue) {
+        //                         //         maxValue = value;
+        //                         //     }
+        //                         // })
 
-                                // maxValue = Math.ceil(maxValue / 10) * 10;
+        //                         // maxValue = Math.ceil(maxValue / 10) * 10;
 
-                                // var newLineWidth;
+        //                         // var newLineWidth;
 
-                                // if (window.screen.availHeight > 1000) {
-                                //     newLineWidth = 10;
-                                // }
+        //                         // if (window.screen.availHeight > 1000) {
+        //                         //     newLineWidth = 10;
+        //                         // }
 
-                                // else {
-                                //     newLineWidth = 5;
-                                // }
+        //                         // else {
+        //                         //     newLineWidth = 5;
+        //                         // }
 
-                                body.removeChild(loadingBars);
-                                chart = new Chart(ctx, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: xValues,
-                                        datasets: [{
-                                            lineTension: 0,
-                                            fill: false,
-                                            type: 'line',
-                                            data: yValues,
-                                            hoverBackgroundColor: '#f4f4f5',
-                                            hoverBorderColor: '#f4f4f5',
-                                            backgroundColor: hoverColor,
-                                            borderColor: hoverColor,
-                                            borderWidth: 5,
-                                            pointBorderColor: hoverColor,
-                                            pointBackgroundColor: '#f4f4f5',
-                                            pointBorderWidth: 4,
-                                            pointRadius: 6,
-                                        }, {
-                                            // label: `Valuation of Apple, Inc.'s Common Stock`,
-                                            data: yValues,
-                                            backgroundColor: '#f4f4f5',
-                                            borderColor: '#f4f4f5',
-                                            hoverBackgroundColor: hoverColor,
-                                            hoverBorderColor: hoverColor,
-                                        }]
-                                    },
-                                    options: {
-                                        // layout: {
-                                        //     padding: {
-                                        //         // left: 20,
-                                        //         // right: 20,
-                                        //         // bottom: 30,
-                                        //         top: 20,
-                                        //     }
-                                        // },
-                                        responsive: true,
-                                        maintainAspectRatio: true,
-                                        onClick: (event, item) => {
+        //                         body.removeChild(loadingBars);
+        //                         chart = new Chart(ctx, {
+        //                             type: 'bar',
+        //                             data: {
+        //                                 labels: xValues,
+        //                                 datasets: [{
+        //                                     lineTension: 0,
+        //                                     fill: false,
+        //                                     type: 'line',
+        //                                     data: yValues,
+        //                                     hoverBackgroundColor: '#f4f4f5',
+        //                                     hoverBorderColor: '#f4f4f5',
+        //                                     backgroundColor: hoverColor,
+        //                                     borderColor: hoverColor,
+        //                                     borderWidth: 5,
+        //                                     pointBorderColor: hoverColor,
+        //                                     pointBackgroundColor: '#f4f4f5',
+        //                                     pointBorderWidth: 4,
+        //                                     pointRadius: 6,
+        //                                 }, {
+        //                                     // label: `Valuation of Apple, Inc.'s Common Stock`,
+        //                                     data: yValues,
+        //                                     backgroundColor: '#f4f4f5',
+        //                                     borderColor: '#f4f4f5',
+        //                                     hoverBackgroundColor: hoverColor,
+        //                                     hoverBorderColor: hoverColor,
+        //                                 }]
+        //                             },
+        //                             options: {
+        //                                 // layout: {
+        //                                 //     padding: {
+        //                                 //         // left: 20,
+        //                                 //         // right: 20,
+        //                                 //         // bottom: 30,
+        //                                 //         top: 20,
+        //                                 //     }
+        //                                 // },
+        //                                 responsive: true,
+        //                                 maintainAspectRatio: true,
+        //                                 onClick: (event, item) => {
 
-                                            var modelPosition = item[0]._index;                                            
-                                            window.open(models[modelPosition]);
-                                        },
-                                        legend: {
-                                            display: false
-                                        },
-                                        title: {
-                                            display: true,
-                                            text: `Valuation of ${companyName}'s Common Stock`,
-                                            fontFamily: 'Source Sans Pro',
-                                            fontSize: 25,
-                                            padding: 30,
-                                        },
-                                        // scaleOverride: true, 
-                                        // scaleSteps: 10,
-                                        // scaleStepWidth: maxValue+10,
-                                        // scaleStartValue: 0,
-                                        scales: {
-                                            yAxes: [{
-                                                ticks: {
-                                                    // barPercentage: 1.5,
-                                                    // categoryPercentage: 1.5,
-                                                    beginAtZero: true,
-                                                    // max: (maxValue + 10),
-                                                    // stepSize: 25,
-                                                    // padding: 25,
-                                                },
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Fair Value',
-                                                    fontFamily: 'Source Sans Pro',
-                                                    fontSize: 16,
-                                                    fontStyle: 'bold'
-                                                },
-                                                gridLines: {
-                                                    color: 'rgba(0,0,0,0)',
-                                                    drawBorder: false,
-                                                    display: false
-                                                },
-                                                afterFit: function (scale) {
-                                                    scale.width = 65;
-                                                }
-                                            }],
-                                            xAxes: [{
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Valuation Methodology',
-                                                    fontFamily: 'Source Sans Pro',
-                                                    fontSize: 16,
-                                                    fontStyle: 'bold',
-                                                },
-                                                gridLines: {
-                                                    color: 'rgba(0,0,0,0)',
-                                                    drawBorder: false,
-                                                    display: false
-                                                },
-                                            }]
-                                        }
-                                    }
-                                });
-                            });
-                    })
+        //                                     var modelPosition = item[0]._index;                                            
+        //                                     window.open(models[modelPosition]);
+        //                                 },
+        //                                 legend: {
+        //                                     display: false
+        //                                 },
+        //                                 title: {
+        //                                     display: true,
+        //                                     text: `Valuation of ${companyName}'s Common Stock`,
+        //                                     fontFamily: 'Source Sans Pro',
+        //                                     fontSize: 25,
+        //                                     padding: 30,
+        //                                 },
+        //                                 // scaleOverride: true, 
+        //                                 // scaleSteps: 10,
+        //                                 // scaleStepWidth: maxValue+10,
+        //                                 // scaleStartValue: 0,
+        //                                 scales: {
+        //                                     yAxes: [{
+        //                                         ticks: {
+        //                                             // barPercentage: 1.5,
+        //                                             // categoryPercentage: 1.5,
+        //                                             beginAtZero: true,
+        //                                             // max: (maxValue + 10),
+        //                                             // stepSize: 25,
+        //                                             // padding: 25,
+        //                                         },
+        //                                         scaleLabel: {
+        //                                             display: true,
+        //                                             labelString: 'Fair Value',
+        //                                             fontFamily: 'Source Sans Pro',
+        //                                             fontSize: 16,
+        //                                             fontStyle: 'bold'
+        //                                         },
+        //                                         gridLines: {
+        //                                             color: 'rgba(0,0,0,0)',
+        //                                             drawBorder: false,
+        //                                             display: false
+        //                                         },
+        //                                         afterFit: function (scale) {
+        //                                             scale.width = 65;
+        //                                         }
+        //                                     }],
+        //                                     xAxes: [{
+        //                                         scaleLabel: {
+        //                                             display: true,
+        //                                             labelString: 'Valuation Methodology',
+        //                                             fontFamily: 'Source Sans Pro',
+        //                                             fontSize: 16,
+        //                                             fontStyle: 'bold',
+        //                                         },
+        //                                         gridLines: {
+        //                                             color: 'rgba(0,0,0,0)',
+        //                                             drawBorder: false,
+        //                                             display: false
+        //                                         },
+        //                                     }]
+        //                                 }
+        //                             }
+        //                         });
+        //                     });
+        //             })
 
-            })
+        //     })
 
-        ticker.onchange = function () {
-            TESTER.style.paddingBottom = "0";
-            body.insertBefore(loadingBars, myChart);
+        // ticker.onchange = function () {
+        //     TESTER.style.paddingBottom = "0";
+        //     body.insertBefore(loadingBars, myChart);
 
-            if (typeof chart === "object") {
-                chart.destroy();
-            }
-            if (body.contains(warningMessage)) {
-                body.removeChild(warningMessage);
-            }
-            if (ticker.value === "") {
-                ticker.value = "ZZZZZZZZ";
-            }
+        //     if (typeof chart === "object") {
+        //         chart.destroy();
+        //     }
+        //     if (body.contains(warningMessage)) {
+        //         body.removeChild(warningMessage);
+        //     }
+        //     if (ticker.value === "") {
+        //         ticker.value = "ZZZZZZZZ";
+        //     }
 
-            fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/company_name`, {
-                headers: {
-                    // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                    // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                    'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-                },
-                // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-            })
-                    .then(rescompanyName => {
-                        let status = rescompanyName.status; 
+        //     fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/company_name`, {
+        //         headers: {
+        //             // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //             // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //             'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //         },
+        //         // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        //     })
+        //             .then(rescompanyName => {
+        //                 let status = rescompanyName.status; 
                         
-                        if (status === 207 || ticker.value === "") {
-                            warningMessage.innerHTML = "Please enter a valid ticker!"
-                            warningMessage.style.marginLeft = "20vw";
-                            warningMessage.style.width = "78.88888888888889vw";
+        //                 if (status === 207 || ticker.value === "") {
+        //                     warningMessage.innerHTML = "Please enter a valid ticker!"
+        //                     warningMessage.style.marginLeft = "20vw";
+        //                     warningMessage.style.width = "78.88888888888889vw";
 
-                            body.removeChild(loadingBars);
-                            TESTER.style.paddingBottom = "28vh";
-                            warningMessage.style.textAlign = 'center';
-                            body.insertBefore(warningMessage, myChart);
-                        }
-                        else {
-                            return rescompanyName.json();
-                        }
-                    })
-                    .then(jsoncompanyName => {
-                        var companyName = jsoncompanyName.data;
+        //                     body.removeChild(loadingBars);
+        //                     TESTER.style.paddingBottom = "28vh";
+        //                     warningMessage.style.textAlign = 'center';
+        //                     body.insertBefore(warningMessage, myChart);
+        //                 }
+        //                 else {
+        //                     return rescompanyName.json();
+        //                 }
+        //             })
+        //             .then(jsoncompanyName => {
+        //                 var companyName = jsoncompanyName.data;
 
-                        fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
-                            headers: {
-                                // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                                // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                                'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-                            },
-                            // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-                        })
-                            .then(resQuote => resQuote.json())
-                            .then(jsonQuote => {                                
-                                var information = {};
-                                information['Market Price'] = jsonQuote.data;
+        //                 fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/data/${ticker.value}/stock_price`, {
+        //                     headers: {
+        //                         // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //                         // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //                         'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //                     },
+        //                     // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        //                 })
+        //                     .then(resQuote => resQuote.json())
+        //                     .then(jsonQuote => {                                
+        //                         var information = {};
+        //                         information['Market Price'] = jsonQuote.data;
 
-                                fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/fairvalues/${ticker.value}/models`, {
-                                    headers: {
-                                        // 'Origin': 'https://robbinhood.herokuapp.com/#/',
-                                        // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
-                                        'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
-                                    },
-                                    // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
-                                })
-                                    .then(resValuations => {
-                                        if (resValuations.status === 402) {
-                                            warningMessage.innerHTML = "Premium key required for this ticker!";
-                                            warningMessage.style.marginLeft = "20vw";
-                                            warningMessage.style.width = "55vw";
+        //                         fetch(`https://cors-anywhere.herokuapp.com/https://api.finbox.io/beta/fairvalues/${ticker.value}/models`, {
+        //                             headers: {
+        //                                 // 'Origin': 'https://robbinhood.herokuapp.com/#/',
+        //                                 // 'API-Key': 'de8cf11d97908f358d139d01b44ba39af52e88e3',
+        //                                 'Authorization': 'Bearer de8cf11d97908f358d139d01b44ba39af52e88e3'
+        //                             },
+        //                             // Authorization: Bearer de8cf11d97908f358d139d01b44ba39af52e88e3,
+        //                         })
+        //                             .then(resValuations => {
+        //                                 if (resValuations.status === 402) {
+        //                                     warningMessage.innerHTML = "Premium key required for this ticker!";
+        //                                     warningMessage.style.marginLeft = "20vw";
+        //                                     warningMessage.style.width = "55vw";
 
-                                            body.removeChild(loadingBars);
-                                            TESTER.style.paddingBottom = "28vh";
-                                            warningMessage.style.textAlign = 'center';
-                                            body.insertBefore(warningMessage, myChart);
-                                        }
-                                        else {
-                                            return resValuations.json();
-                                        }
-                                    })
-                                    .then(jsonValuations => {
+        //                                     body.removeChild(loadingBars);
+        //                                     TESTER.style.paddingBottom = "28vh";
+        //                                     warningMessage.style.textAlign = 'center';
+        //                                     body.insertBefore(warningMessage, myChart);
+        //                                 }
+        //                                 else {
+        //                                     return resValuations.json();
+        //                                 }
+        //                             })
+        //                             .then(jsonValuations => {
 
-                                        valuations = jsonValuations.data.models;
+        //                                 valuations = jsonValuations.data.models;
 
-                                        valuations.forEach((element, index) => {
-                                            information[element.name] = parseFloat(element.price.mid.toFixed(2));
-                                        })
+        //                                 valuations.forEach((element, index) => {
+        //                                     information[element.name] = parseFloat(element.price.mid.toFixed(2));
+        //                                 })
 
-                                        var marketPrice = information['Market Price'];
-                                        var finalMetric = 0;
-                                        var hoverColor = '';
+        //                                 var marketPrice = information['Market Price'];
+        //                                 var finalMetric = 0;
+        //                                 var hoverColor = '';
 
-                                        if (information['5Y DCF Growth Exit'] !== undefined) {
-                                            finalMetric = information['5Y DCF Growth Exit'];
-                                        }
-                                        else if (information['5Y DCF EBITDA Exit'] !== undefined) {
-                                            finalMetric = information['5Y DCF EBITDA Exit'];
-                                        }
-                                        else if (information['EBITDA Multiples'] !== undefined) {
-                                            finalMetric = information['EBITDA Multiples'];
-                                        }
-                                        else if (information['P/E Multiples'] !== undefined) {
-                                            finalMetric = information['P/E Multiples'];
-                                        }
+        //                                 if (information['5Y DCF Growth Exit'] !== undefined) {
+        //                                     finalMetric = information['5Y DCF Growth Exit'];
+        //                                 }
+        //                                 else if (information['5Y DCF EBITDA Exit'] !== undefined) {
+        //                                     finalMetric = information['5Y DCF EBITDA Exit'];
+        //                                 }
+        //                                 else if (information['EBITDA Multiples'] !== undefined) {
+        //                                     finalMetric = information['EBITDA Multiples'];
+        //                                 }
+        //                                 else if (information['P/E Multiples'] !== undefined) {
+        //                                     finalMetric = information['P/E Multiples'];
+        //                                 }
 
-                                        if (finalMetric >= marketPrice) {
-                                            hoverColor = '#21ce99';
-                                            ticker.onfocus = function () {
-                                                ticker.style.borderColor = '#21ce99';
-                                            }
-                                            ticker.onblur = function () {
-                                                ticker.style.borderColor = '#f4f4f5';
-                                            }
-                                            document.activeElement.style.borderColor = '#21ce99';
-                                        }
-                                        else {
-                                            hoverColor = '#FF0000';
-                                            ticker.onfocus = function () {
-                                                ticker.style.borderColor = '#FF0000';
-                                            }
-                                            ticker.onblur = function () {
-                                                ticker.style.borderColor = '#f4f4f5';
-                                            }
-                                            ticker.hasfocus = function () {
-                                                ticker.style.borderColor = '#FF0000';
-                                            }
-                                            document.activeElement.style.borderColor = '#FF0000';
-                                        }
+        //                                 if (finalMetric >= marketPrice) {
+        //                                     hoverColor = '#21ce99';
+        //                                     ticker.onfocus = function () {
+        //                                         ticker.style.borderColor = '#21ce99';
+        //                                     }
+        //                                     ticker.onblur = function () {
+        //                                         ticker.style.borderColor = '#f4f4f5';
+        //                                     }
+        //                                     document.activeElement.style.borderColor = '#21ce99';
+        //                                 }
+        //                                 else {
+        //                                     hoverColor = '#FF0000';
+        //                                     ticker.onfocus = function () {
+        //                                         ticker.style.borderColor = '#FF0000';
+        //                                     }
+        //                                     ticker.onblur = function () {
+        //                                         ticker.style.borderColor = '#f4f4f5';
+        //                                     }
+        //                                     ticker.hasfocus = function () {
+        //                                         ticker.style.borderColor = '#FF0000';
+        //                                     }
+        //                                     document.activeElement.style.borderColor = '#FF0000';
+        //                                 }
 
-                                        xValues = Object.keys(information);
-                                        yValues = Object.values(information);
-                                        var models = [];
+        //                                 xValues = Object.keys(information);
+        //                                 yValues = Object.values(information);
+        //                                 var models = [];
 
-                                        xValues.forEach((methodology) => {
-                                            switch (methodology) {
-                                                case '5Y DCF Revenue Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-5yr`);
-                                                    break;
-                                                case '10Y DCF Growth Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-10yr`);
-                                                    break;
-                                                case '10Y DCF EBITDA Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-10yr`);
-                                                    break;
-                                                case '10Y DCF Revenue Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-10yr`);
-                                                    break;
-                                                case 'Earnings Power Value':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/epv`);
-                                                    break;
-                                                case 'Dividends: Stable Growth':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/ddm-sg`);
-                                                    break;
-                                                case 'Dividends: Multi-Stage':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/ddm-ms`);
-                                                    break;
-                                                case 'P/E Multiples':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/pe-multiples`);
-                                                    break;
-                                                case 'EBITDA Multiples':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/ebitda-multiples`);
-                                                    break;
-                                                case '5Y DCF Growth Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-5yr`);
-                                                    break;
-                                                case '5Y DCF EBITDA Exit':
-                                                    models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-5yr`);
-                                                    break;
-                                                default:
-                                                    models.push(`https://finbox.com/${ticker.value}`);
-                                                    break;
-                                            }
-                                        })
+        //                                 xValues.forEach((methodology) => {
+        //                                     switch (methodology) {
+        //                                         case '5Y DCF Revenue Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-5yr`);
+        //                                             break;
+        //                                         case '10Y DCF Growth Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-10yr`);
+        //                                             break;
+        //                                         case '10Y DCF EBITDA Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-10yr`);
+        //                                             break;
+        //                                         case '10Y DCF Revenue Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-revenue-exit-10yr`);
+        //                                             break;
+        //                                         case 'Earnings Power Value':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/epv`);
+        //                                             break;
+        //                                         case 'Dividends: Stable Growth':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/ddm-sg`);
+        //                                             break;
+        //                                         case 'Dividends: Multi-Stage':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/ddm-ms`);
+        //                                             break;
+        //                                         case 'P/E Multiples':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/pe-multiples`);
+        //                                             break;
+        //                                         case 'EBITDA Multiples':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/ebitda-multiples`);
+        //                                             break;
+        //                                         case '5Y DCF Growth Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-growth-exit-5yr`);
+        //                                             break;
+        //                                         case '5Y DCF EBITDA Exit':
+        //                                             models.push(`https://finbox.com/${ticker.value}/models/dcf-ebitda-exit-5yr`);
+        //                                             break;
+        //                                         default:
+        //                                             models.push(`https://finbox.com/${ticker.value}`);
+        //                                             break;
+        //                                     }
+        //                                 })
 
-                                        // var maxValue = 0;
-                                        // var stepSize = 0;
+        //                                 // var maxValue = 0;
+        //                                 // var stepSize = 0;
                                         
-                                        // yValues.forEach(value => {
-                                        //     if (value > maxValue) {
-                                        //         maxValue = value;
-                                        //     }
-                                        // })
+        //                                 // yValues.forEach(value => {
+        //                                 //     if (value > maxValue) {
+        //                                 //         maxValue = value;
+        //                                 //     }
+        //                                 // })
                                         
-                                        // if (((Math.ceil(maxValue / 25) * 25) % 50 === 0) && maxValue > 100) { 
-                                        //     stepSize = 50;
-                                        // }
+        //                                 // if (((Math.ceil(maxValue / 25) * 25) % 50 === 0) && maxValue > 100) { 
+        //                                 //     stepSize = 50;
+        //                                 // }
 
-                                        // else {
-                                        //     stepSize = 25;
-                                        // }
-                                        body.removeChild(loadingBars);
-                                        chart = new Chart(ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: xValues,
-                                                datasets: [{
-                                                    lineTension: 0,
-                                                    fill: false,
-                                                    type: 'line',
-                                                    data: yValues,
-                                                    hoverBackgroundColor: '#f4f4f5',
-                                                    hoverBorderColor: '#f4f4f5',
-                                                    backgroundColor: hoverColor,
-                                                    borderColor: hoverColor,
-                                                    borderWidth: 5,
-                                                    pointBorderColor: hoverColor,
-                                                    pointBackgroundColor: '#f4f4f5',
-                                                    pointBorderWidth: 4,
-                                                    pointRadius: 6,
-                                                }, {
-                                                    // label: `Valuation of Apple, Inc.'s Common Stock`,
-                                                    data: yValues,
-                                                    backgroundColor: '#f4f4f5',
-                                                    borderColor: '#f4f4f5',
-                                                    hoverBackgroundColor: hoverColor,
-                                                    hoverBorderColor: hoverColor,
-                                                }]
-                                            },
-                                            options: {
-                                                // layout: {
-                                                //     padding: {
-                                                //         // left: 20,
-                                                //         // right: 20,
-                                                //         // bottom: 30,
-                                                //         top: 20,
-                                                //     }
-                                                // },
-                                                responsive: true,
-                                                // maintainAspectRatio: false,
-                                                onClick: (event, item) => {
+        //                                 // else {
+        //                                 //     stepSize = 25;
+        //                                 // }
+        //                                 body.removeChild(loadingBars);
+        //                                 chart = new Chart(ctx, {
+        //                                     type: 'bar',
+        //                                     data: {
+        //                                         labels: xValues,
+        //                                         datasets: [{
+        //                                             lineTension: 0,
+        //                                             fill: false,
+        //                                             type: 'line',
+        //                                             data: yValues,
+        //                                             hoverBackgroundColor: '#f4f4f5',
+        //                                             hoverBorderColor: '#f4f4f5',
+        //                                             backgroundColor: hoverColor,
+        //                                             borderColor: hoverColor,
+        //                                             borderWidth: 5,
+        //                                             pointBorderColor: hoverColor,
+        //                                             pointBackgroundColor: '#f4f4f5',
+        //                                             pointBorderWidth: 4,
+        //                                             pointRadius: 6,
+        //                                         }, {
+        //                                             // label: `Valuation of Apple, Inc.'s Common Stock`,
+        //                                             data: yValues,
+        //                                             backgroundColor: '#f4f4f5',
+        //                                             borderColor: '#f4f4f5',
+        //                                             hoverBackgroundColor: hoverColor,
+        //                                             hoverBorderColor: hoverColor,
+        //                                         }]
+        //                                     },
+        //                                     options: {
+        //                                         // layout: {
+        //                                         //     padding: {
+        //                                         //         // left: 20,
+        //                                         //         // right: 20,
+        //                                         //         // bottom: 30,
+        //                                         //         top: 20,
+        //                                         //     }
+        //                                         // },
+        //                                         responsive: true,
+        //                                         // maintainAspectRatio: false,
+        //                                         onClick: (event, item) => {
 
-                                                    var modelPosition = item[0]._index;
+        //                                             var modelPosition = item[0]._index;
                                                     
                                                     
                                                     
                                                     
-                                                    window.open(models[modelPosition]);
-                                                },
-                                                // animation: {
-                                                //     duration: 1000,
-                                                //     easing: '',
-                                                //     onHover: (event, item) => {
-                                                //         if (item.length > 0) {
+        //                                             window.open(models[modelPosition]);
+        //                                         },
+        //                                         // animation: {
+        //                                         //     duration: 1000,
+        //                                         //     easing: '',
+        //                                         //     onHover: (event, item) => {
+        //                                         //         if (item.length > 0) {
 
-                                                //         }
-                                                //     }
-                                                // },
-                                                // onHover: (event, item) => {
-                                                //     if (item.length > 0) {
-                                                //         item
-                                                // },
-                                                legend: {
-                                                    display: false
-                                                },
-                                                title: {
-                                                    display: true,
-                                                    text: `Valuation of ${companyName}'s Common Stock`,
-                                                    fontFamily: 'Source Sans Pro',
-                                                    fontSize: 25,
-                                                    padding: 30,
-                                                },
-                                                scales: {
-                                                    yAxes: [{
-                                                        ticks: {
-                                                            beginAtZero: true,
-                                                            // max: (maxValue+10),
-                                                            // stepSize: stepSize,
-                                                            // padding: 25,
-                                                        },
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: 'Fair Value',
-                                                            fontFamily: 'Source Sans Pro',
-                                                            fontSize: 16,
-                                                            fontStyle: 'bold'
-                                                        },
-                                                        gridLines: {
-                                                            color: 'rgba(0,0,0,0)',
-                                                            drawBorder: false,
-                                                            display: false
-                                                        },
-                                                        afterFit: function (scale) {
-                                                            scale.width = 65;
-                                                        }
-                                                    }],
-                                                    xAxes: [{
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: 'Valuation Methodology',
-                                                            fontFamily: 'Source Sans Pro',
-                                                            fontSize: 16,
-                                                            fontStyle: 'bold',
-                                                        },
-                                                        gridLines: {
-                                                            color: 'rgba(0,0,0,0)',
-                                                            drawBorder: false,
-                                                            display: false
-                                                        }, 
-                                                    }]
-                                                }
-                                            }
-                                        });
-                                    });
-                            })
-                    })
-        }
+        //                                         //         }
+        //                                         //     }
+        //                                         // },
+        //                                         // onHover: (event, item) => {
+        //                                         //     if (item.length > 0) {
+        //                                         //         item
+        //                                         // },
+        //                                         legend: {
+        //                                             display: false
+        //                                         },
+        //                                         title: {
+        //                                             display: true,
+        //                                             text: `Valuation of ${companyName}'s Common Stock`,
+        //                                             fontFamily: 'Source Sans Pro',
+        //                                             fontSize: 25,
+        //                                             padding: 30,
+        //                                         },
+        //                                         scales: {
+        //                                             yAxes: [{
+        //                                                 ticks: {
+        //                                                     beginAtZero: true,
+        //                                                     // max: (maxValue+10),
+        //                                                     // stepSize: stepSize,
+        //                                                     // padding: 25,
+        //                                                 },
+        //                                                 scaleLabel: {
+        //                                                     display: true,
+        //                                                     labelString: 'Fair Value',
+        //                                                     fontFamily: 'Source Sans Pro',
+        //                                                     fontSize: 16,
+        //                                                     fontStyle: 'bold'
+        //                                                 },
+        //                                                 gridLines: {
+        //                                                     color: 'rgba(0,0,0,0)',
+        //                                                     drawBorder: false,
+        //                                                     display: false
+        //                                                 },
+        //                                                 afterFit: function (scale) {
+        //                                                     scale.width = 65;
+        //                                                 }
+        //                                             }],
+        //                                             xAxes: [{
+        //                                                 scaleLabel: {
+        //                                                     display: true,
+        //                                                     labelString: 'Valuation Methodology',
+        //                                                     fontFamily: 'Source Sans Pro',
+        //                                                     fontSize: 16,
+        //                                                     fontStyle: 'bold',
+        //                                                 },
+        //                                                 gridLines: {
+        //                                                     color: 'rgba(0,0,0,0)',
+        //                                                     drawBorder: false,
+        //                                                     display: false
+        //                                                 }, 
+        //                                             }]
+        //                                         }
+        //                                     }
+        //                                 });
+        //                             });
+        //                     })
+        //             })
+        // }
     }
 });
                 
