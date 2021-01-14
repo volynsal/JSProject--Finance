@@ -414,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
         myChart.style.marginLeft = "1.1vw";
         myChart.style.marginTop = "-3vh";
 
-        warningMessage.innerHTML = "Finbox fully deprecated their API in December 2020. Please bear with us as we search for an alternate data provider. In the meantime, you can go to my personal website to view a preview of the project: https://volynsal.github.io/."
+        warningMessage.innerHTML = "Finbox fully deprecated their API in December 2020. Patience is greatly appreciated as the search continues for an alternate data provider. In the meantime, you can go to my personal website for a preview of the project: https://volynsal.github.io/."
         warningMessage.style.marginTop = "15vh";
         warningMessage.style.marginLeft = "10vw";
         warningMessage.style.width = "78.88888888888889vw";
@@ -437,9 +437,10 @@ document.addEventListener("DOMContentLoaded", () => {
         img.style.display = "none";
 
         personalNav.style.marginTop = "3.5vh";
-        personalNav.style.marginLeft = "10vw";
+        personalNav.style.marginLeft = "11vw";
         githubLogo.style.paddingLeft = "0.6vw";
         githubLogo.style.paddingRight = "0.6vw";
+        personalNav.style.transform = "scale(1.25)";
 
         var datapageHeader = document.createElement('div');
         datapageHeader.appendChild(img);
