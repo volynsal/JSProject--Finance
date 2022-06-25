@@ -22,7 +22,7 @@
     "fetch": "^1.1.0",
     "ify-loader": "^1.1.0",
     "lodash": "^4.17.11",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "plotly": "^1.0.6",
     "plotly.js": "^1.48.2"
   }
