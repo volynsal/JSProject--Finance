@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "babel-loader": "^8.0.6",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "cors-anywhere": "^0.4.1",
     "d3.js": "0.0.2-security",
     "fetch": "^1.1.0",
